@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+    rabbit:
+        image: rabbitmq:3.7.4-management
+        ports:
+            - 8080:15672
