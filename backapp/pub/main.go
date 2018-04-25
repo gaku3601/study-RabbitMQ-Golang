@@ -24,9 +24,9 @@ func main() {
 	channel, err := conn.Channel()
 	failOnError(err, "Failed to open a channel")
 
-	sendMessage(channel, "my-queue", "Hello, AMQP1!!")
-	sendMessage(channel, "my-queue", "Hello, AMQP2!!")
-	sendMessage(channel, "my-queue", "Hello, AMQP3!!")
+	sendMessage(channel, "my-queue", "{'test':'ababaab1'}")
+	sendMessage(channel, "my-queue", "{'test':'ababaab2'}")
+	sendMessage(channel, "my-queue", "{'test':'ababaab3'}")
 }
 
 func sendMessage(channel *amqp.Channel, queueName string, payload string) {
@@ -36,7 +36,7 @@ func sendMessage(channel *amqp.Channel, queueName string, payload string) {
 		false,     // mandatory
 		false,     // immediate
 		amqp.Publishing{
-			ContentType: "text/plain",
+			ContentType: "application/json",
 			Body:        []byte(payload),
 		})
 	failOnError(err, "Failed to publish a message")
